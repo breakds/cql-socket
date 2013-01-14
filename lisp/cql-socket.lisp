@@ -1,5 +1,10 @@
 (in-package #:cql-socket)
 
+(define-condition cql-query-error (error)
+  ((query :initarg :query 
+	  :initform nil
+	  :documentation "The query that fails")))
+
 (defun cql-query (q-string &key (host "localhost") (port 17373))
   "Issue a cql query to the python cassandra socket server."
   (let ((s (socket-connect host port)))
@@ -9,7 +14,12 @@
       (wait-for-input s)
       (loop for line = (read (socket-stream s) nil 'eof)
          until (eq line 'eof)
-         collect line))))
+         collect (restart-case 
+		     (if (eq line 'error)
+			 (error 'cql-query-error 
+				:query q-string)
+			 line)
+		   (cql-ignore-error () nil))))))
 
 (defun cql-use-keyspace (keyspace-name &key (host "localhost") (port 17373))
   "Ask the python cassandra socket server to change the keyspace it is

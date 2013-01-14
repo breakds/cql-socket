@@ -6,6 +6,8 @@
   (:nicknames #:cql-socket)
   (:use #:cl
         #:usocket)
-  (:export cql-query
+  (:export cql-query-error
+	   cql-query
+	   cql-ignore-error
            cql-use-keyspace))
               
