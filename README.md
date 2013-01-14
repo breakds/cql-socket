@@ -1,4 +1,4 @@
 cql-socket
 ==========
 
-common lisp cql drive (via python cql drive)
+common lisp Cassandra Query Language drive (via python cql drive)
