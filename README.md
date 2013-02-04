@@ -1,4 +1,4 @@
-# [Common Lisp Cassandra Query Language (CQL) Proxy]
+# [Common Lisp Cassandra Query Language (CQL) Proxy](https://github.com/breakds/cql-socket)
 
 ## Introduction
 
@@ -31,7 +31,7 @@ path-to-this-project/python/cqlServer.py
 Load the asdf system via quicklisp. (Put the project folder under quicklisp-folder/local-projects or create a soft link 
 under that folder before loading the system)
 
-```commonlisp
+```lisp
 (ql:quickload 'clq-socket)
 ```
 
@@ -40,7 +40,7 @@ under that folder before loading the system)
 
 Connect to a cassandra keyspace
 
-```commonlisp
+```lisp
 (cql-socket:cql-use-keyspace "keyspace-name" :host "localhost" :port 9160)
 ```
 
@@ -48,7 +48,7 @@ Connect to a cassandra keyspace
 
 You can start to send queries now by
 
-```commonlisp
+```lisp
 (cql-socket:cql-query "select * from data-base-name")
 ```
 
